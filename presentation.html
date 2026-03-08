@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자기소개 발표 — 김태경</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f7f7;
+      --text: #111;
+      --grey: #999;
+      --light: #ddd;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ===== Slide Container ===== */
+    .deck {
+      width: 100%; height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ===== Corner Brackets ===== */
+    .bracket-tl, .bracket-br {
+      position: fixed;
+      width: 30px; height: 30px;
+      border-color: rgba(0,0,0,0.15);
+      border-style: solid;
+      border-width: 0;
+      z-index: 100;
+    }
+    .bracket-tl { top: 40px; left: 40px; border-top-width: 2px; border-left-width: 2px; }
+    .bracket-br { bottom: 40px; right: 40px; border-bottom-width: 2px; border-right-width: 2px; }
+
+    /* ===== Page Indicator ===== */
+    .page-indicator {
+      position: fixed;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    .page-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--light);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .page-dot.active {
+      background: var(--text);
+      transform: scale(1.3);
+    }
+
+    /* ===== Slide Number ===== */
+    .slide-num {
+      position: fixed;
+      top: 44px;
+      right: 50px;
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      color: var(--grey);
+      letter-spacing: 2px;
+      z-index: 100;
+    }
+
+    /* ===== Typography ===== */
+    .slide-tag {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      color: var(--grey);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .slide-title .em {
+      display: inline;
+      border-bottom: 3px solid var(--text);
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      color: #555;
+      text-align: center;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    .slide-body {
+      font-size: 20px;
+      font-weight: 300;
+      color: #333;
+      text-align: center;
+      line-height: 2;
+      max-width: 640px;
+    }
+
+    .slide-body strong {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .slide-body .highlight {
+      display: inline-block;
+      background: var(--text);
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* Divider line */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--text);
+      margin: 24px 0;
+    }
+
+    /* Card-style box */
+    .card-box {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 32px 40px;
+      max-width: 520px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .card-box .label {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      color: var(--grey);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .card-box .value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .card-box .value:last-child { margin-bottom: 0; }
+
+    .card-box .desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .flow-step {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .flow-step.active-step {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    .flow-arrow {
+      font-size: 18px;
+      color: var(--grey);
+    }
+
+    /* Quote */
+    .quote {
+      font-size: 26px;
+      font-weight: 300;
+      font-style: italic;
+      color: #444;
+      text-align: center;
+      line-height: 1.8;
+      max-width: 550px;
+    }
+
+    .quote::before { content: '"'; }
+    .quote::after { content: '"'; }
+
+    /* Mono text */
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--grey);
+    }
+
+    /* Goal list */
+    .goal-list {
+      list-style: none;
+      text-align: left;
+      max-width: 500px;
+    }
+
+    .goal-list li {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 2.2;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .goal-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--grey);
+    }
+
+    /* QR code section */
+    .qr-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .qr-row img {
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .qr-text {
+      text-align: left;
+    }
+
+    .qr-text .qr-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      color: var(--grey);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .qr-text .qr-desc {
+      font-size: 15px;
+      font-weight: 400;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .qr-arrow {
+      font-size: 28px;
+      color: var(--light);
+      animation: arrow-bounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes arrow-bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+    }
+
+    /* Key controls hint */
+    .controls-hint {
+      position: fixed;
+      bottom: 16px;
+      right: 50px;
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      color: #ccc;
+      letter-spacing: 1px;
+      z-index: 100;
+    }
+
+    /* ===== Animations ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .slide.active .fade-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.active .fade-up:nth-child(1) { transition-delay: 0.1s; }
+    .slide.active .fade-up:nth-child(2) { transition-delay: 0.25s; }
+    .slide.active .fade-up:nth-child(3) { transition-delay: 0.4s; }
+    .slide.active .fade-up:nth-child(4) { transition-delay: 0.55s; }
+    .slide.active .fade-up:nth-child(5) { transition-delay: 0.7s; }
+    .slide.active .fade-up:nth-child(6) { transition-delay: 0.85s; }
+  </style>
+</head>
+<body>
+
+  <div class="bracket-tl"></div>
+  <div class="bracket-br"></div>
+
+  <div class="slide-num" id="slideNum">01 / 07</div>
+
+  <div class="page-indicator" id="pageIndicator"></div>
+
+  <div class="controls-hint">← → ARROW KEYS</div>
+
+  <div class="deck" id="deck">
+
+    <!-- ========== SLIDE 1: Title ========== -->
+    <div class="slide active" data-slide="0">
+      <div class="slide-tag fade-up">SELF INTRODUCTION</div>
+      <div class="slide-title fade-up">안녕하세요,<br><span class="em">김태경</span>입니다.</div>
+      <div class="divider fade-up"></div>
+      <div class="slide-subtitle fade-up">
+        서강대학교 AI기반 자유전공학부 26학번
+      </div>
+      <div class="mono fade-up" style="margin-top: 20px;">2026.03.09</div>
+    </div>
+
+    <!-- ========== SLIDE 2: Who am I ========== -->
+    <div class="slide" data-slide="1">
+      <div class="slide-tag fade-up">WHO AM I</div>
+      <div class="slide-title fade-up" style="font-size: 36px;">나는 어떤 사람인가?</div>
+      <div class="divider fade-up"></div>
+      <div class="slide-body fade-up">
+        AI를 사용하는 것만으로는 부족했기에,<br>
+        직접 <strong>설계하고 구현하는 개발자</strong>가 되고 싶은 사람.
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 3: Experience — AI 사용 경험 ========== -->
+    <div class="slide" data-slide="2">
+      <div class="slide-tag fade-up">MY EXPERIENCE</div>
+      <div class="slide-title fade-up" style="font-size: 30px;">AI를 "사용"하면서 느낀 것</div>
+      <div class="divider fade-up"></div>
+      <div class="slide-body fade-up" style="font-size: 17px; line-height: 2.2;">
+        이 프레젠테이션도<br>
+        <span class="highlight">GitHub Copilot</span> 등 AI 도구와 <strong>함께</strong> 만들었습니다.<br><br>
+        최근 화제인 <strong>에이전틱 AI</strong>는<br>
+        사용자가 직접 하던 일들을 AI가 대신 수행합니다.<br><br>
+        그런데 AI가 더 많은 걸 하게 될수록,<br>
+        <strong>내가 AI를 더 잘 알아야</strong> 제대로 활용할 수 있었습니다.
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 4: Turning point ========== -->
+    <div class="slide" data-slide="3">
+      <div class="slide-tag fade-up">TURNING POINT</div>
+      <div class="slide-title fade-up" style="font-size: 30px;">"사용자"의 벽</div>
+      <div class="divider fade-up"></div>
+      <div class="flow fade-up">
+        <div class="flow-step">AI를 사용</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">AI가 더 많은 걸 수행</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step active-step">내가 더 알아야 한다</div>
+      </div>
+      <div class="slide-body fade-up" style="font-size: 17px; margin-top: 12px;">
+        AI를 잘 쓰려면 결국 <strong>원리를 알아야</strong> 했고,<br>
+        쓰는 사람이 아니라 <strong>만드는 사람</strong>이<br>
+        되어야겠다고 생각했습니다.
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 5: University Goal ========== -->
+    <div class="slide" data-slide="4">
+      <div class="slide-tag fade-up">UNIVERSITY GOAL</div>
+      <div class="slide-title fade-up" style="font-size: 30px;">대학에서 이루고 싶은 목표</div>
+      <div class="divider fade-up"></div>
+      <ul class="goal-list fade-up">
+        <li>AI 모델의 <strong>원리</strong>를 깊이 이해하기</li>
+        <li>시스템을 직접 <strong>설계·개발</strong>할 수 있는 기초 쌓기</li>
+        <li>"사용자"에서 <strong>"개발자"</strong>로 넘어가기 위한 토대 만들기</li>
+      </ul>
+      <div class="card-box fade-up" style="margin-top: 28px;">
+        <div class="label">GOAL</div>
+        <div class="desc">
+          AI의 원리를 깊이 이해하고,<br>
+          직접 설계·개발할 수 있는<br>
+          토대를 만들어 가기.
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 6: Closing ========== -->
+    <div class="slide" data-slide="5">
+      <div class="slide-tag fade-up">CLOSING</div>
+      <div class="quote fade-up">
+        AI를 활용하는 사용자에서,<br>
+        설계하고 구현하는 개발자로.
+      </div>
+      <div class="divider fade-up"></div>
+      <div class="slide-subtitle fade-up" style="font-size: 16px; color: #999;">
+        김태경 — 서강대학교 AI기반 자유전공학부
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 7: Profile Card Website + QR ========== -->
+    <div class="slide" data-slide="6">
+      <div class="slide-tag fade-up">PROFILE CARD</div>
+      <div class="slide-title fade-up" style="font-size: 28px;">명함, 조금 다르게</div>
+      <div class="divider fade-up"></div>
+      <div class="slide-body fade-up" style="font-size: 16px; line-height: 2;">
+        누군가를 소개하는 가장 전통적인 방식은 <strong>명함</strong>입니다.<br>
+        같은 내용이라도 <strong>어떻게 전달하느냐</strong>에 따라<br>
+        받아들이는 인상은 완전히 달라집니다.<br><br>
+        그래서 종이 한 장 대신,<br>
+        <strong>3D 인터랙티브 프로필 카드</strong>를 만들어 보았습니다.
+      </div>
+      <div class="qr-row fade-up">
+        <img src="qrcode.png" alt="프로필 카드 QR코드">
+        <div class="qr-arrow">→</div>
+        <div class="qr-text">
+          <div class="qr-label">SCAN TO VIEW</div>
+          <div class="qr-desc">
+            스마트폰 카메라로<br>
+            QR코드를 스캔하세요.
+          </div>
+        </div>
+      </div>
+      <div class="mono fade-up" style="margin-top: 20px;">감사합니다.</div>
+    </div>
+
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let current = 0;
+
+    const $slideNum = document.getElementById('slideNum');
+    const $indicator = document.getElementById('pageIndicator');
+
+    // Build page dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'page-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.idx = i;
+      dot.addEventListener('click', () => goTo(i));
+      $indicator.appendChild(dot);
+    }
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= totalSlides || idx === current) return;
+      slides[current].classList.remove('active');
+      // Reset fade-up children
+      slides[current].querySelectorAll('.fade-up').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+      });
+
+      current = idx;
+      slides[current].classList.add('active');
+      // Trigger fade-up
+      slides[current].querySelectorAll('.fade-up').forEach(el => {
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+
+      $slideNum.textContent =
+        String(current + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+      document.querySelectorAll('.page-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+
+    // Click left/right halves
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.page-indicator')) return;
+      if (e.clientX > window.innerWidth / 2) goTo(current + 1);
+      else goTo(current - 1);
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        if (dx < 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+    });
+  </script>
+</body>
+</html>
+
