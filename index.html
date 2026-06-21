@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기인프 기말 개념정리 (쉽게) — Lec 06~09</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<style>
+  :root{
+    --bg:#0f1320; --panel:#171c2b; --panel2:#1d2435; --ink:#eaeef7; --muted:#98a2b8; --line:#2a3242;
+    --blue:#6ea8fe; --green:#4ade80; --amber:#fbbf24; --red:#fb7185; --purple:#c08cff;
+    --code:#0b0e16;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 18px 120px}
+  header.hero{background:linear-gradient(135deg,#1a2236,#141a29 70%);border-bottom:1px solid var(--line);padding:30px 18px 24px}
+  .hero-in{max-width:920px;margin:0 auto}
+  .hero h1{margin:0 0 6px;font-size:25px;letter-spacing:-.4px}
+  .hero .sub{color:var(--muted);font-size:14.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:13px}
+  .legend span{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:5px 11px}
+
+  nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:22px 0}
+  nav.toc h2{margin:0 0 10px;font-size:13px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+  nav.toc a{color:var(--blue);text-decoration:none;font-size:14.5px}
+  nav.toc a:hover{text-decoration:underline}
+  nav.toc ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:26px}
+  @media(max-width:620px){nav.toc ul{columns:1}}
+
+  h2.lec{font-size:21px;margin:38px 0 4px;border-left:5px solid var(--blue);padding:4px 0 4px 13px;scroll-margin-top:14px}
+  h3.grp{font-size:16px;color:var(--amber);margin:24px 0 10px;letter-spacing:.3px}
+
+  .concept{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 17px;margin:13px 0}
+  .cterm{font-size:17.5px;font-weight:800;margin-bottom:9px}
+  .cterm .en{font-size:13px;color:var(--muted);font-weight:600;margin-left:7px}
+  .row{display:flex;gap:9px;margin:7px 0;align-items:flex-start}
+  .tag{flex-shrink:0;font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;margin-top:3px;min-width:62px;text-align:center}
+  .t-def{background:#16263f;color:var(--blue);border:1px solid #274468}
+  .t-easy{background:#10261a;color:var(--green);border:1px solid #1f5436}
+  .t-use{background:#2a2410;color:var(--amber);border:1px solid #5a4f1e}
+  .t-key{background:#2a1620;color:var(--red);border:1px solid #5a2840}
+  .row .txt{flex:1}
+  .row .txt code{background:#222a3c;color:#ffd9a0;padding:1px 6px;border-radius:5px;font-family:"JetBrains Mono",Consolas,monospace;font-size:13px}
+  pre{background:var(--code);border:1px solid #1b2233;border-radius:9px;padding:12px 14px;overflow-x:auto;margin:7px 0 2px}
+  pre code{background:none;padding:0;font-size:13.5px;line-height:1.55;font-family:"JetBrains Mono",Consolas,monospace}
+  strong{color:#fff}
+  .mini{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+  .mini b{color:#fff}
+
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:#cdd6e6;font-size:12.5px}
+  td code{background:#222a3c;color:#ffd9a0;padding:1px 5px;border-radius:4px;font-size:12.5px;font-family:Consolas,monospace}
+  tr:nth-child(even) td{background:#131829}
+
+  footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+
+  @media print{
+    body{background:#fff;color:#111;font-size:11pt}
+    .wrap{padding:0}
+    header.hero{background:#f3f5fb;color:#111}
+    .hero h1,strong,.cterm{color:#111}
+    .concept{break-inside:avoid;border-color:#ccc;background:#fff}
+    nav.toc{break-inside:avoid}
+    h2.lec{break-after:avoid;border-color:#333}
+    pre{background:#f6f7fb;border-color:#ddd}
+    pre code,pre code span{color:#111 !important}
+    .row .txt code,td code{background:#eee;color:#900}
+    .tag{border:1px solid #999 !important}
+    .t-def{background:#eef4ff;color:#06c}.t-easy{background:#eefcf2;color:#070}.t-use{background:#fff8e6;color:#960}.t-key{background:#fff0f3;color:#c03}
+    a{color:#06c;text-decoration:none}
+    th{background:#eef !important}
+    tr:nth-child(even) td{background:#f7f8fc}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-in">
+    <h1>🧩 기인프 기말 개념정리 — 쉽게, 그리고 “어떻게 쓰는지”까지</h1>
+    <div class="sub">기말 범위 전체(Lecture 06~09)의 모든 개념을 한눈에 · 정의 → 쉽게 → 사용법 → 핵심</div>
+    <div class="legend">
+      <span>🔵 <b>정의</b> 무엇인가</span>
+      <span>🟢 <b>쉽게</b> 한마디로</span>
+      <span>🟡 <b>어떻게</b> 코드로 쓰는 법</span>
+      <span>🔴 <b>핵심</b> 시험 포인트·실수주의</span>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+<nav class="toc">
+  <h2>목차</h2>
+  <ul>
+    <li><a href="#l6a">Lec06-A · 재귀(Recursion)</a></li>
+    <li><a href="#l6b">Lec06-B · 딕셔너리(Dictionary)</a></li>
+    <li><a href="#l7a">Lec07-A · 테스팅 &amp; 디버깅</a></li>
+    <li><a href="#l7b">Lec07-B · 예외 &amp; assert</a></li>
+    <li><a href="#l8">Lec08 · 객체지향(OOP)</a></li>
+    <li><a href="#l9">Lec09 · 상속(Inheritance)</a></li>
+    <li><a href="#word">자주 나오는 용어 30초 정리</a></li>
+  </ul>
+</nav>
+
+<h2 class="lec" id="l6a">Lecture 06-A · 재귀 (Recursion)</h2>
+
+<div class="concept">
+  <div class="cterm">재귀 <span class="en">Recursion</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">함수가 <strong>자기 자신을 호출</strong>하는 기법.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">큰 문제를 <strong>똑같이 생긴 더 작은 문제</strong>로 쪼개서 푼다. (마트료시카 인형, 거울 속 거울)</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def fact(n):           # n! = n*(n-1)*...*1
+    if n == 1:         # ① 멈추는 곳
+        return 1
+    return n * fact(n-1)  # ② 자기 자신을 더 작게 호출
+
+print(fact(4))         # 24</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">모든 재귀 = <strong>① base case + ② recursive step</strong> 두 부분. 이 둘만 찾으면 끝.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">base case <span class="en">기저 사례 · 멈추는 곳</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">더 이상 쪼개지 않고 <strong>즉시 답을 주는 종료 조건</strong>.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">계단을 내려가다 <strong>“여기서 멈춰!”</strong> 하는 맨 아래 칸.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">if n == 1:      # 이게 base case
+    return 1</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">base case가 <strong>없거나 못 만나면 무한 재귀</strong> → <code>RecursionError</code>. 피보나치처럼 base case가 <strong>2개</strong>일 수도 있다(<code>n==0 or n==1</code>).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">recursive step <span class="en">재귀 단계</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">문제를 <strong>더 작은 같은 문제</strong>로 줄여 자기 자신을 부르는 부분.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">“나머지는 더 작은 나한테 맡길게” — 입력을 한 단계 작게 해서 다시 호출.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">return n * fact(n-1)       # n-1 로 더 작게
+return s[0]==s[-1] and isPal(s[1:-1])  # 양끝 떼고 가운데로</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">반드시 <strong>입력이 작아져야</strong> base case에 도달한다(안 작아지면 무한반복).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">호출 스코프 <span class="en">각 호출은 독립</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">재귀 호출은 <strong>매번 자기만의 공간(스택 프레임)</strong>을 만든다.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">호출마다 <strong>변수 <code>n</code>이 따로따로</strong>라 서로 안 섞인다. 값을 돌려주면 직전 호출로 돌아간다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def mystery(n):
+    if n == 0: return
+    print(n)
+    mystery(n-1)
+    print(n)
+mystery(3)   # 출력:  3 2 1 1 2 3   (내려갔다 올라오며 두 번)</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">“출력 순서 추적” 문제 단골. <strong>내려갈 때 한 번, 되돌아올 때 한 번</strong> 실행됨을 기억.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">반복 vs 재귀 <span class="en">loop vs recursion</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">같은 일을 <code>while/for</code>로(반복) 또는 자기호출로(재귀) 할 수 있다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python"># 반복
+def mult_iter(a, b):
+    result = 0
+    while b > 0:
+        result += a; b -= 1
+    return result
+# 재귀
+def mult(a, b):
+    if b == 1: return a
+    return a + mult(a, b-1)</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">재귀는 <strong>간결·직관적</strong>이지만 호출 비용·중복계산으로 <strong>느릴 수</strong> 있다(예: 피보나치).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">중첩 함수(보조 함수) <span class="en">helper function</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">함수 <strong>안에 함수를 정의</strong>해서 재귀 부분을 따로 둔 형태.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">바깥은 “준비”, 안쪽은 “진짜 재귀”. 회문(palindrome) 예제가 대표.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def isPalindrome(s):
+    def toChars(s):              # 준비: 소문자 + 알파벳만
+        s = s.lower(); ans = ''
+        for c in s:
+            if c in 'abcdefghijklmnopqrstuvwxyz': ans += c
+        return ans
+    def isPal(s):                # 진짜 재귀
+        if len(s) <= 1: return True
+        return s[0] == s[-1] and isPal(s[1:-1])
+    return isPal(toChars(s))</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">하노이 탑도 재귀 대표 예: “위 n-1개 옮기고 → 큰 1개 옮기고 → n-1개 다시”.</div></div>
+</div>
+
+<h2 class="lec" id="l6b">Lecture 06-B · 딕셔너리 (Dictionary)</h2>
+
+<div class="concept">
+  <div class="cterm">딕셔너리 <span class="en">dict · {key: value}</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>key(열쇠)–value(값) 쌍</strong>을 모아두는 자료형.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">국어사전처럼 <strong>“단어(key)로 뜻(value)을 바로 찾는다”</strong>. 리스트는 번호(0,1,2)로 찾지만 딕셔너리는 아무 이름표로 찾음.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">grades = {'Ana':'B', 'John':'A+'}   # 만들기
+grades['John']            # 조회 → 'A+'
+empty = {}                # 빈 딕셔너리</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><strong>순서 개념이 없다</strong>(번호로 못 찾음). 이름표(key)로만 찾는다.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">key 규칙 / value 규칙</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">key는 <strong>불변(immutable)·유일</strong>해야 하고, value는 아무거나 가능.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt">
+    <table>
+      <tr><th></th><th>가능</th><th>불가</th></tr>
+      <tr><td><b>key</b></td><td><code>int, float, str, tuple, bool</code> (유일)</td><td><code>list</code> (가변이라 ✕)</td></tr>
+      <tr><td><b>value</b></td><td>무엇이든 (중복 OK, 리스트·딕셔너리도)</td><td>제한 없음</td></tr>
+    </table>
+  </div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">시험 단골: <strong>“key로 list를 쓸 수 있나?” → 안 됨</strong>(가변이라 hashable 아님).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">기본 연산 (추가·조회·삭제·검사)</div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">d = {'Ana':'B', 'John':'A+'}
+d['Sylvan'] = 'A'     # 추가 / 이미 있으면 수정
+d['John']             # 조회 → 'A+'   (없는 key면 KeyError!)
+'John' in d           # 있는지 검사 → True
+del(d['Ana'])         # 삭제
+d.keys()              # 모든 key   (순회 가능)
+d.values()            # 모든 value</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">없는 key를 <code>d['x']</code>로 꺼내면 <code>KeyError</code>. 그래서 먼저 <code>'x' in d</code>로 확인.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">빈도 세기 패턴 <span class="en">counting</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">각 항목이 <strong>몇 번 나왔는지</strong> 딕셔너리로 센다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def count(items):
+    d = {}
+    for x in items:
+        if x in d:        # 이미 있으면
+            d[x] += 1
+        else:             # 처음 보면
+            d[x] = 1
+    return d
+# 한 줄 버전:  d[x] = d.get(x, 0) + 1</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><strong>가장 많이 쓰는 패턴</strong>(가사 단어 세기 예제). <code>d.get(x,0)+1</code> 한 줄도 꼭 외우기.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">메모이제이션 <span class="en">memoization</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">한 번 계산한 값을 <strong>딕셔너리에 저장</strong>해 두고, 다음엔 꺼내 쓰는 것.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">“이미 푼 문제는 다시 안 푼다” → 재귀를 <strong>엄청 빠르게</strong>.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def fib(n, d):
+    if n in d:            # 저장돼 있으면 바로 반환
+        return d[n]
+    ans = fib(n-1, d) + fib(n-2, d)
+    d[n] = ans            # 계산 결과 저장
+    return ans
+
+print(fib(6, {1:1, 2:2}))   # 13</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">fib(34): 1140만 번 → <strong>65번</strong>으로 감소. 단 <strong>입력이 같으면 항상 같은 결과</strong>인 함수에만 안전.</div></div>
+</div>
+
+<h2 class="lec" id="l7a">Lecture 07-A · 테스팅 &amp; 디버깅</h2>
+
+<div class="concept">
+  <div class="cterm">테스팅 vs 디버깅 <span class="en">testing vs debugging</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>테스팅</strong>=입력↔출력을 스펙과 비교해 “문제가 있나?” 찾기. <strong>디버깅</strong>=“왜 틀렸나? 어떻게 고치나?” 원인 추적.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">테스팅 = 검사(불량 찾기), 디버깅 = 수리(원인 고치기).</div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">방어적 프로그래밍 = 미리 대비(명세 작성·모듈화·조건 검사). “수프에 벌레 안 빠지게 뚜껑 닫기”.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">테스트 종류 <span class="en">unit / regression / integration</span></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt">
+    <table>
+      <tr><th>종류</th><th>뜻 (쉽게)</th></tr>
+      <tr><td><b>Unit</b> 단위</td><td>함수 <b>하나씩</b> 따로 검사</td></tr>
+      <tr><td><b>Regression</b> 회귀</td><td>고친 버그가 <b>다시 안 생기는지</b> 테스트 추가</td></tr>
+      <tr><td><b>Integration</b> 통합</td><td><b>전체</b>가 잘 맞물려 도는지</td></tr>
+    </table>
+  </div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">이름과 뜻 매칭 문제 단골. “함수 하나=unit, 전체=integration”.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">Black box vs Glass box 테스트</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>black box</strong>=코드 안 보고 <strong>설명서(명세)만</strong> 보고 테스트. <strong>glass box</strong>=<strong>코드 속</strong>을 보고 모든 경로를 테스트.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">black=상자 밖에서, glass=투명상자 안을 들여다보며.</div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">black box는 <strong>경계값</strong>(빈 리스트·0·아주 큰 수)을 꼭 넣어 본다. glass box가 모든 경로를 거치면 <strong>path-complete</strong>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">디버깅 방법 <span class="en">print + 이분 탐색</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><code>print</code>로 중간 값을 찍어 버그 위치를 좁히는 것.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">코드 <strong>한가운데에 print</strong>를 찍어 보고, 버그가 앞쪽인지 뒤쪽인지 반씩 좁혀간다(이분 탐색).</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def f(x):
+    print("진입:", x)     # 함수 들어올 때
+    y = x * 2
+    print("중간:", y)     # 중간 값
+    return y</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">“왜 되지?”가 아니라 <strong>“왜 이 결과가 나왔지?”</strong>를 가설→실험으로. 함수 단위로 작성·테스트·디버그.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">에러(예외) 종류 <span class="en">error types</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">실행 중 문제가 생기면 파이썬이 <strong>종류별 에러</strong>를 낸다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt">
+    <table>
+      <tr><th>코드 예</th><th>에러</th><th>뜻</th></tr>
+      <tr><td><code>[1,2,3][5]</code></td><td><code>IndexError</code></td><td>리스트 범위 초과</td></tr>
+      <tr><td><code>d['없는키']</code></td><td><code>KeyError</code></td><td>딕셔너리에 없는 key</td></tr>
+      <tr><td><code>int('abc')</code></td><td><code>ValueError</code></td><td>타입은 맞지만 값이 부적절</td></tr>
+      <tr><td><code>'3'/4</code></td><td><code>TypeError</code></td><td>타입이 안 맞음</td></tr>
+      <tr><td><code>print(x)</code> (x 미정의)</td><td><code>NameError</code></td><td>없는 변수 사용</td></tr>
+      <tr><td><code>1/0</code></td><td><code>ZeroDivisionError</code></td><td>0으로 나눔</td></tr>
+      <tr><td><code>None.foo</code></td><td><code>AttributeError</code></td><td>없는 속성 접근</td></tr>
+      <tr><td>괄호 안 닫음</td><td><code>SyntaxError</code></td><td>문법 자체가 틀림</td></tr>
+    </table>
+  </div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">“이 코드는 무슨 에러?” 매칭 문제 빈출. 위 표만 외우면 됨.</div></div>
+</div>
+
+<h2 class="lec" id="l7b">Lecture 07-B · 예외 처리 &amp; assert</h2>
+
+<div class="concept">
+  <div class="cterm">예외 처리 <span class="en">try / except</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">에러가 나도 <strong>프로그램을 멈추지 않고</strong> 대신 처리하는 구조.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt"><code>try</code> 안을 실행하다 에러가 나면 → <code>except</code>로 점프해서 처리하고 → 계속 진행.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">try:
+    a = int(input())
+    print(1 / a)
+except ValueError:        # 숫자가 아닐 때
+    print("숫자를 입력하세요")
+except ZeroDivisionError: # 0일 때
+    print("0으로 못 나눠요")</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">교수님 “한국말로 중요” 강조 부분. <strong>특정 에러별로 <code>except ErrorName:</code></strong> 나눠 처리 가능.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">else / finally</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>else</strong>=예외가 <strong>안 났을 때만</strong> 실행. <strong>finally</strong>=무슨 일이 있어도 <strong>항상</strong> 실행.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">try:
+    위험한_일()
+except SomeError:
+    print("에러 처리")
+else:
+    print("에러 없을 때만")
+finally:
+    print("끝나면 항상 (파일 닫기 등 정리)")</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><code>finally</code>는 <strong>return·break·에러와 상관없이 무조건</strong> 실행. “정리(청소)용”.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">raise <span class="en">직접 예외 일으키기</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">내가 직접 <strong>“이건 에러야!”라고 예외를 발생</strong>시키는 것.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def f(x):
+    if x < 0:
+        raise ValueError("음수는 안 돼요")
+    return x ** 0.5</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">잘못된 값을 슬쩍 넘기지 말고 <strong><code>raise</code>로 분명히 신호</strong>하는 게 좋은 방식.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">assert <span class="en">단언·전제조건 검사</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">“<strong>이건 반드시 참이어야 해</strong>”라고 확인. 거짓이면 <code>AssertionError</code>로 즉시 멈춤.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">함수 입구에서 <strong>“이상한 입력이면 바로 멈춰!”</strong> 하는 검문소.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def avg(grades):
+    assert len(grades) != 0, '빈 리스트 안 됨'   # 거짓이면 즉시 중단
+    return sum(grades) / len(grades)</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">형식: <code>assert 조건, "메시지"</code>. 주로 <strong>입력 검사</strong>. 버그를 <strong>생긴 그 자리에서</strong> 잡는 방어 도구.</div></div>
+</div>
+
+<h2 class="lec" id="l8">Lecture 08 · 객체지향 프로그래밍 (OOP) ★ 제일 중요</h2>
+
+<div class="concept">
+  <div class="cterm">객체 <span class="en">object</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">데이터(상태)와 그걸 다루는 기능(메서드)을 <strong>한 덩어리로 묶은 것</strong>. 파이썬의 모든 값은 객체.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt"><code>1234</code>는 int 객체, <code>"hi"</code>는 str 객체. 각 객체는 ①타입 ②내부 데이터 ③쓸 수 있는 기능(메서드)을 가짐.</div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">“객체는 타입(=클래스)의 <strong>인스턴스</strong>” — 1234는 int의 인스턴스.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">클래스 vs 인스턴스 <span class="en">class vs instance</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>클래스</strong>=설계도/틀. <strong>인스턴스</strong>=그 틀로 찍어낸 실제 객체.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt"><strong>붕어빵 틀(클래스) → 붕어빵들(인스턴스)</strong>. 강아지란 ‘이렇게 생겼다’ 정의=클래스, 실제 강아지 10마리=인스턴스.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Dog:          # 틀(정의)
+    ...
+a = Dog()           # 인스턴스 1 (찍어냄)
+b = Dog()           # 인스턴스 2</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">교수님 “이거 모르면 기말 못 본다” 1순위. <strong>정의(클래스)와 사용(인스턴스 생성)을 구분</strong>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">데이터 속성 vs 메서드</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>데이터 속성</strong>=객체가 <strong>무엇인지</strong>(상태·명사). <strong>메서드</strong>=객체가 <strong>무엇을 하는지</strong>(행동·동사, 그 클래스 전용 함수).</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">좌표라면 → 데이터: <code>x, y</code> / 메서드: ‘두 점 사이 거리 구하기’.</div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">속성=명사, 메서드=동사로 기억.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">클래스 정의 &amp; __init__ &amp; self</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><code>class</code>로 틀을 만들고, <code>__init__</code>은 <strong>인스턴스를 만들 때 자동 실행</strong>되는 초기화 함수. <code>self</code>는 <strong>지금 만들어지는 그 객체 자신</strong>.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Coordinate(object):
+    def __init__(self, x, y):   # 생성자 (자동 호출)
+        self.x = x              # self = 이 객체 자신
+        self.y = y              # self.x, self.y = 인스턴스 변수
+    def distance(self, other):  # 메서드 (첫 인자 항상 self)
+        return ((self.x-other.x)**2 + (self.y-other.y)**2)**0.5
+
+c = Coordinate(3, 4)            # __init__ 자동 실행 (self는 자동 전달)
+print(c.x)                      # 3   ← 점(.)으로 속성 접근</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><strong>① <code>self</code>는 정의할 때 항상 첫 인자, 호출할 땐 안 넘김</strong>(자동). ② <code>__init__</code>은 <strong>return 없음</strong>. ③ <code>self.x = x</code> (그냥 <code>x=x</code> 아님!).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">메서드 호출 — 두 방식은 같다</div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">c.distance(zero)               # 보통 방식 (self ← c)
+Coordinate.distance(c, zero)   # 완전히 동일 (self에 c 직접 전달)</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">교수님 강조 포인트. <code>c.m(z)</code> = <code>Class.m(c, z)</code>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">__str__ <span class="en">출력 모양 정하기</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><code>print(객체)</code> 할 때 보여줄 <strong>문자열</strong>을 직접 정하는 특수 메서드.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">안 정하면 <code>&lt;__main__.Coordinate object at 0x...&gt;</code> 같은 <strong>이상한 주소</strong>가 나옴.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">    def __str__(self):
+        return "<" + str(self.x) + "," + str(self.y) + ">"
+# print(c)  →  <3,4></code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">기본 동작을 내 맘대로 바꾸는 것 = <strong>오버라이드(override)</strong>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">type() / isinstance()</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><code>type(x)</code>=x의 타입(클래스) 확인. <code>isinstance(x, C)</code>=x가 C의 인스턴스인지 True/False.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">print(type(c))                  # <class '__main__.Coordinate'>
+print(isinstance(c, Coordinate))# True</code></pre></div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">연산자 오버로딩 <span class="en">특수 메서드</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><code>+ - == &lt;</code> 같은 연산자를 <strong>내 클래스에 맞게</strong> 동작시키는 특수 메서드(이중 밑줄).</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt">
+    <table>
+      <tr><th>메서드</th><th>연산</th><th>메서드</th><th>연산</th></tr>
+      <tr><td><code>__add__</code></td><td><code>+</code></td><td><code>__eq__</code></td><td><code>==</code></td></tr>
+      <tr><td><code>__sub__</code></td><td><code>-</code></td><td><code>__lt__</code></td><td><code>&lt;</code></td></tr>
+      <tr><td><code>__mul__</code></td><td><code>*</code></td><td><code>__len__</code></td><td><code>len()</code></td></tr>
+    </table>
+    <pre><code class="language-python">class Fraction(object):
+    def __init__(self, n, d):
+        self.n = n; self.d = d
+    def __add__(self, other):       # 분수 덧셈
+        return Fraction(self.n*other.d + other.n*self.d, self.d*other.d)
+    def __str__(self):
+        return str(self.n) + "/" + str(self.d)
+
+print(Fraction(1,2) + Fraction(1,4))   # 6/8  ← __add__ 호출</code></pre>
+  </div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">보통 <strong>같은 타입의 새 객체를 만들어 반환</strong>한다(예: <code>Fraction(...)</code>).</div></div>
+</div>
+
+<h2 class="lec" id="l9">Lecture 09 · 상속 (Inheritance) ★ “별표 별표”</h2>
+
+<div class="concept">
+  <div class="cterm">getter / setter</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">데이터 속성을 <strong>읽는 함수(getter)</strong>와 <strong>바꾸는 함수(setter)</strong>.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">밖에서 <code>a.age</code>로 직접 만지지 말고 <code>a.get_age()</code>/<code>a.set_age(5)</code>로 다루자.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Animal(object):
+    def __init__(self, age):
+        self.age = age
+        self.name = None
+    def get_age(self):           # getter
+        return self.age
+    def set_age(self, newage):   # setter
+        self.age = newage</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">왜? 내부 변수명을 바꿔도(<code>age→years</code>) 바깥 코드가 안 깨짐 → <strong>정보 은닉</strong>(유지보수 ↑).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">정보 은닉 <span class="en">information hiding</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">내부 구현을 숨기고 <strong>정해진 통로(메서드)로만</strong> 접근하게 하는 원칙.</div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><strong>파이썬은 정보 은닉이 약하다</strong>: 밖에서 <code>a.age=999</code>로 바꾸거나 <code>a.size="tiny"</code>로 새 속성도 만들 수 있음(가능하지만 나쁜 스타일).</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">기본 인자 <span class="en">default argument</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">인자를 안 주면 <strong>미리 정해둔 기본값</strong>을 사용.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">def set_name(self, newname=""):   # 기본값 ""
+    self.name = newname
+a.set_name()          # 이름 = ""
+a.set_name("초코")    # 이름 = "초코"</code></pre></div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">상속 <span class="en">inheritance · 부모→자식</span></div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>부모 클래스(superclass)의 속성·메서드를 자식 클래스(subclass)가 그대로 물려받는</strong> 것.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">자식은 부모 걸 다 가진 채 ① 새 기능 추가 ② 기존 기능 바꾸기(오버라이드) 가능. (예: Animal → Cat, Person → Student)</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Cat(Animal):          # 괄호 안 Animal = 부모
+    def speak(self):        # 새 기능 추가
+        print("meow")
+    # __init__ 안 써도 Animal 것을 그대로 씀</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><code>class 자식(부모):</code> 형태. <strong>같은 일을 두 번 안 쓰려고</strong> 상속을 쓴다.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">오버라이드 &amp; 메서드 탐색 순서 ★</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>오버라이드</strong>=자식이 부모와 <strong>같은 이름의 메서드를 새로 정의</strong>해 덮어쓰기.</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">메서드를 부르면 → <strong>지금 클래스</strong>부터 찾고 → 없으면 <strong>부모, 조부모로 올라가며</strong> → <strong>처음 만난 것</strong>을 쓴다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Animal(object):
+    def speak(self): print("...")
+class Cat(Animal):
+    def speak(self): print("meow")   # 오버라이드
+Cat(3).speak()   # meow  (Animal 것 대신 Cat 것)</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">교수님 “별표 별표” 강조. <strong>자식 메서드가 부모 것을 가린다</strong>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">부모 생성자 호출</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">자식 <code>__init__</code> 안에서 <strong>부모의 <code>__init__</code>을 불러</strong> 부모 부분을 초기화.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Person(Animal):
+    def __init__(self, name, age):
+        Animal.__init__(self, age)   # ★ 부모 생성자, self 직접 전달
+        self.set_name(name)
+        self.friends = []</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt">형태: <strong><code>부모클래스.__init__(self, ...)</code></strong>. <code>self</code>를 꼭 직접 넘긴다.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">클래스 변수 vs 인스턴스 변수 ★</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt"><strong>클래스 변수</strong>=모든 인스턴스가 <strong>공유</strong>하는 하나의 값(<code>self</code> 없이 선언). <strong>인스턴스 변수</strong>=객체마다 <strong>따로</strong>(<code>self.</code>).</div></div>
+  <div class="row"><span class="tag t-easy">쉽게</span><div class="txt">주민등록번호 발급기처럼, <strong>다 같이 쓰는 카운터</strong>로 객체마다 고유 번호를 매긴다.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">class Rabbit(Animal):
+    tag = 1                      # ★ 클래스 변수 (self 없음, 공유)
+    def __init__(self, age):
+        Animal.__init__(self, age)
+        self.rid = Rabbit.tag    # 인스턴스 변수 (각자)
+        Rabbit.tag += 1          # 다음 토끼 위해 +1
+
+a = Rabbit(2); b = Rabbit(3)
+print(a.rid, b.rid, Rabbit.tag)  # 1 2 3</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><strong><code>self</code> 없으면 클래스 변수(공유), <code>self.</code> 있으면 인스턴스 변수(독립)</strong>. 접근은 <code>Rabbit.tag</code> vs <code>self.rid</code>.</div></div>
+</div>
+
+<div class="concept">
+  <div class="cterm">import &amp; random</div>
+  <div class="row"><span class="tag t-def">정의</span><div class="txt">이미 만들어진 <strong>모듈(코드 묶음)을 가져다 쓰는 것</strong>.</div></div>
+  <div class="row"><span class="tag t-use">어떻게</span><div class="txt"><pre><code class="language-python">import random
+r = random.random()    # 0 이상 1 미만 균등 난수
+if r < 0.25:
+    print("homework")</code></pre></div></div>
+  <div class="row"><span class="tag t-key">핵심</span><div class="txt"><code>import</code>는 파일 맨 위에. <code>random.random()</code> = <strong>0~1 사이 실수</strong>.</div></div>
+</div>
+
+<h2 class="lec" id="word">⚡ 자주 나오는 용어 30초 정리</h2>
+<div class="concept">
+  <div class="row"><span class="tag t-use">표</span><div class="txt">
+  <table>
+    <tr><th>용어</th><th>한마디 정의</th></tr>
+    <tr><td><b>재귀</b></td><td>자기 자신을 부르는 함수 (base case + recursive step)</td></tr>
+    <tr><td><b>base case</b></td><td>재귀가 멈추는 종료 조건</td></tr>
+    <tr><td><b>memoization</b></td><td>계산한 값을 dict에 저장해 재사용 (빠르게)</td></tr>
+    <tr><td><b>딕셔너리</b></td><td>key→value 매핑, 이름표로 찾기 (순서 없음)</td></tr>
+    <tr><td><b>key 규칙</b></td><td>불변·유일 (str/int/tuple O, list X)</td></tr>
+    <tr><td><b>try/except</b></td><td>에러 나도 안 멈추고 처리하고 계속</td></tr>
+    <tr><td><b>finally</b></td><td>무슨 일이 있어도 항상 실행</td></tr>
+    <tr><td><b>raise</b></td><td>내가 직접 예외 일으키기</td></tr>
+    <tr><td><b>assert</b></td><td>조건이 거짓이면 즉시 중단 (입력 검사)</td></tr>
+    <tr><td><b>클래스/인스턴스</b></td><td>붕어빵 틀 / 찍어낸 붕어빵</td></tr>
+    <tr><td><b>__init__</b></td><td>인스턴스 만들 때 자동 실행되는 초기화 (return X)</td></tr>
+    <tr><td><b>self</b></td><td>그 객체 자신 (정의 땐 첫 인자, 호출 땐 생략)</td></tr>
+    <tr><td><b>__str__</b></td><td>print(객체)할 때 보여줄 문자열 정하기</td></tr>
+    <tr><td><b>오버라이드</b></td><td>부모 메서드를 자식이 같은 이름으로 덮어쓰기</td></tr>
+    <tr><td><b>상속</b></td><td>부모의 속성·메서드를 자식이 물려받음 <code>class 자식(부모)</code></td></tr>
+    <tr><td><b>클래스 변수</b></td><td>self 없이 선언, 모든 인스턴스가 공유</td></tr>
+  </table>
+  </div></div>
+</div>
+
+<footer>기인프 기말 개념정리(쉽게) · Lecture 06~09 · 정의·사용법 중심 · 코드는 Python 3로 실행 검증</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>try{hljs.highlightAll();}catch(e){}</script>
+</body>
+</html>
